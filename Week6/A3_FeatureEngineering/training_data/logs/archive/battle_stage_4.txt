@@ -1,0 +1,9 @@
+
+🏆 GRAND CHAMPION 🏆
+👑 Name: Elastic_L100_C10 + ADASYN_G1
+🔁 Generation: 1
+🧬 Genome: C = 0.78, l1_ratio = 0.86
+📈 PR AUC: 0.039
+🎖 ROC AUC: 0.600
+🧬 Lineage: child of Elastic_L100_C10 + ADASYN_G0
+🏁 Champion of champions!

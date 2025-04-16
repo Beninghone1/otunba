@@ -1,0 +1,9 @@
+
+🏆 GRAND CHAMPION 🏆
+👑 Name: Elastic_L100_C10 + Borderline SMOTE_G47
+🔁 Generation: 47
+🧬 Genome: C = 0.15, l1_ratio = 0.86
+📈 PR AUC: 0.178
+🎖 ROC AUC: 0.817
+🧬 Lineage: child of Elastic_L100_C10 + Borderline SMOTE_G17
+🏁 Crowned with glory!

@@ -1,0 +1,106 @@
+
+🎬 Initial Fighters Enter the Arena!
+
+🎮 Generation 1 Begins!
+-------------------------
+🏆 Top Performers:
+1. Elastic_L30_C1 + Random Undersample_G0: PR AUC = 0.079
+2. Elastic_L30_C1 + Cluster Centroids_G0: PR AUC = 0.077
+3. Elastic_L100_C10 + Random Undersample_G0: PR AUC = 0.030
+
+💘 Elastic_L30_C1 + Random Undersample breeds 2 children
+
+👊 Elastic_L30_C1 + Random Undersample_child_1_G1 steps into the light!
+📍 Style: Random Undersample
+🧬 Genome: C = 0.03, l1_ratio = 0.26
+🔁 Generation: 1
+🏆 Last Score: PR AUC = 0.075
+🧬 Lineage: child of Elastic_L30_C1 + Random Undersample_G0
+
+👊 Elastic_L30_C1 + Random Undersample_child_2_G1 is ready to make waves!
+📍 Style: Random Undersample
+🧬 Genome: C = 0.19, l1_ratio = 0.29
+🔁 Generation: 1
+🏆 Last Score: PR AUC = 0.034
+🧬 Lineage: child of Elastic_L30_C1 + Random Undersample_G0
+
+💘 Elastic_L30_C1 + Cluster Centroids breeds 2 children
+
+👊 Elastic_L30_C1 + Cluster Centroids_child_1_G1 is ready to make waves!
+📍 Style: Cluster Centroids
+🧬 Genome: C = 0.01, l1_ratio = 0.36
+🔁 Generation: 1
+🏆 Last Score: PR AUC = 0.505
+🧬 Lineage: child of Elastic_L30_C1 + Cluster Centroids_G0
+
+👊 Elastic_L30_C1 + Cluster Centroids_child_2_G1 throws their gloves into the arena!
+📍 Style: Cluster Centroids
+🧬 Genome: C = 0.15, l1_ratio = 0.38
+🔁 Generation: 1
+🏆 Last Score: PR AUC = 0.079
+🧬 Lineage: child of Elastic_L30_C1 + Cluster Centroids_G0
+
+💘 Elastic_L100_C10 + Random Undersample breeds 2 children
+
+👊 Elastic_L100_C10 + Random Undersample_child_1_G1 is ready to make waves!
+📍 Style: Random Undersample
+🧬 Genome: C = 1.02, l1_ratio = 0.94
+🔁 Generation: 1
+🏆 Last Score: PR AUC = 0.030
+🧬 Lineage: child of Elastic_L100_C10 + Random Undersample_G0
+
+👊 Elastic_L100_C10 + Random Undersample_child_2_G1 steps into the light!
+📍 Style: Random Undersample
+🧬 Genome: C = 1.09, l1_ratio = 1.00
+🔁 Generation: 1
+🏆 Last Score: PR AUC = 0.027
+🧬 Lineage: child of Elastic_L100_C10 + Random Undersample_G0
+
+✅ Survivors advancing to next generation:
+- Elastic_L30_C1 + Cluster Centroids_G1 | PR AUC = 0.505 → barely makes the cut.
+- Elastic_L30_C1 + Random Undersample_G0 | PR AUC = 0.079 → barely makes the cut.
+- Elastic_L30_C1 + Cluster Centroids_G1 | PR AUC = 0.079 → dominates the leaderboard.
+- Elastic_L30_C1 + Cluster Centroids_G0 | PR AUC = 0.077 → hangs on by a thread.
+- Elastic_L30_C1 + Random Undersample_G1 | PR AUC = 0.075 → hangs on by a thread.
+- Elastic_L30_C1 + Random Undersample_G1 | PR AUC = 0.034 → dominates the leaderboard.
+- Elastic_L100_C10 + Random Undersample_G1 | PR AUC = 0.030 → clutches their spot for next round.
+- Elastic_L100_C10 + Random Undersample_G0 | PR AUC = 0.030 → clutches their spot for next round.
+- Elastic_L50_C5 + Random Undersample_G0 | PR AUC = 0.030 → clutches their spot for next round.
+
+💀 Eliminated this round:
+- Elastic_L100_C10 + Random Undersample_G1 | PR AUC = 0.027 → can’t continue to the next round.
+
+📋 Summary Table – Generation 1 (Dataset: imbalanced_sparse_w0_n10_d10.csv):
+
+   Generation                           Dataset  Baseline PR AUC  \
+2           1  imbalanced_sparse_w0_n10_d10.csv            0.011   
+3           1  imbalanced_sparse_w0_n10_d10.csv            0.011   
+0           1  imbalanced_sparse_w0_n10_d10.csv            0.011   
+1           1  imbalanced_sparse_w0_n10_d10.csv            0.011   
+4           1  imbalanced_sparse_w0_n10_d10.csv            0.011   
+5           1  imbalanced_sparse_w0_n10_d10.csv            0.011   
+
+                                      Label  PR AUC Beats Baseline?  \
+2     Elastic_L30_C1 + Cluster Centroids_G1   0.505           ✅ Yes   
+3     Elastic_L30_C1 + Cluster Centroids_G1   0.079           ✅ Yes   
+0    Elastic_L30_C1 + Random Undersample_G1   0.075           ✅ Yes   
+1    Elastic_L30_C1 + Random Undersample_G1   0.034           ✅ Yes   
+4  Elastic_L100_C10 + Random Undersample_G1   0.030           ✅ Yes   
+5  Elastic_L100_C10 + Random Undersample_G1   0.027           ✅ Yes   
+
+                                             Lineage        Status  
+2     child of Elastic_L30_C1 + Cluster Centroids_G0    ✅ Survived  
+3     child of Elastic_L30_C1 + Cluster Centroids_G0    ✅ Survived  
+0    child of Elastic_L30_C1 + Random Undersample_G0    ✅ Survived  
+1    child of Elastic_L30_C1 + Random Undersample_G0    ✅ Survived  
+4  child of Elastic_L100_C10 + Random Undersample_G0    ✅ Survived  
+5  child of Elastic_L100_C10 + Random Undersample_G0  ❌ Eliminated  
+
+🏆 GRAND CHAMPION 🏆
+👑 Name: Elastic_L30_C1 + Cluster Centroids_G1
+🔁 Generation: 1
+🧬 Genome: C = 0.01, l1_ratio = 0.36
+📈 PR AUC: 0.505
+🎖 ROC AUC: 0.500
+🧬 Lineage: child of Elastic_L30_C1 + Cluster Centroids_G0
+🏁 The crowd goes wild!

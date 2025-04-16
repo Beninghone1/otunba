@@ -1,0 +1,9 @@
+
+🏆 GRAND CHAMPION 🏆
+👑 Name: Elastic_L100_C10 + Cluster Centroids_G40
+🔁 Generation: 40
+🧬 Genome: C = 0.05, l1_ratio = 0.85
+📈 PR AUC: 0.110
+🎖 ROC AUC: 0.593
+🧬 Lineage: child of Elastic_L100_C10 + Cluster Centroids_G29
+🏁 Reigns supreme!

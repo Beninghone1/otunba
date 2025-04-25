@@ -1,0 +1,132 @@
+Synthetic Data Generator Module README
+Overview
+
+Module: synthetic_data_generator.py
+Location: A2_DataPreprocessing/sandbox_week3/scripts/
+Purpose: Generates synthetic financial and macroeconomic datasets to support rare-event prediction and reversal causal diagnostic processes, addressing the scarcity of real-world rare events for machine learning and statistical modeling.
+
+Goal
+The synthetic_data_generator.py module creates synthetic datasets that replicate the statistical properties, correlations, and causal relationships of real-world financial and macroeconomic data. Its primary objectives are:
+
+Enable Rare-Event Prediction: Provide sufficient synthetic data to train models for predicting infrequent, high-impact events (e.g., market crashes, economic crises).
+Support Reversal Causal Diagnostics: Simulate scenarios to identify factors critical for building resilient infrastructures (e.g., financial systems, economic policies) by analyzing conditions that mitigate rare events.
+
+This module is particularly valuable in the A2_DataPreprocessing repository, where real-world data for rare events is limited, hindering effective modeling and analysis.
+Functionality
+The module offers the following key features:
+
+Data Characterization:
+
+Analyzes real-world datasets to extract statistical properties (e.g., mean, variance, skewness) and feature correlations.
+Identifies factors associated with rare events (e.g., market volatility, liquidity).
+
+
+Synthetic Data Generation:
+
+Employs techniques like Gaussian Mixture Models (GMM), SMOTE-based oversampling, or Conditional Generative Adversarial Networks (GANs) to generate synthetic samples.
+Simulates rare events by introducing extreme conditions (e.g., high volatility) based on historical patterns.
+Preserves temporal dependencies and feature interactions for realistic data.
+
+
+Causal Factor Simulation:
+
+Generates synthetic scenarios with varying resilience factors (e.g., regulatory oversight, liquidity buffers) to support causal analysis.
+Enables controlled experiments to determine which factors reduce the likelihood or impact of rare events.
+
+
+Validation and Export:
+
+Validates synthetic data against real-world data using statistical tests (e.g., Kolmogorov-Smirnov test).
+Exports synthetic datasets to sandbox_week3/data/synthetic/ (e.g., synth_rare_event_data.csv).
+
+
+
+Integration with A2_DataPreprocessing
+The module is designed to fit into the sandbox_week3/ experimentation workflow:
+
+Inputs: Uses real-world datasets from sandbox_week3/data/raw/ or sandbox_week3/data/processed/ (e.g., financial_data_cleaned.csv, market_stress.csv).
+Outputs: Saves synthetic datasets to sandbox_week3/data/synthetic/ for use in notebooks (e.g., cnn_mlp.ipynb, rare_event_resampling_experiments.ipynb) and models (e.g., CNN, ElasticNet, NEAT).
+Experimentation: Supports prototyping by providing data for testing resampling techniques, model training, and visualizations.
+Diagnostics: Facilitates reversal causal diagnostics by generating data for dashboards (e.g., diffusion_diagnostics_dashboard.png) and feature importance plots (e.g., ≡ƒö╣ Market Stress Over Time & Top Features.png).
+Promotion: Validated synthetic datasets and generation logic can be moved to main/src/ (e.g., integrated into preprocessing.py) for production use.
+
+Usage
+Prerequisites
+
+Ensure dependencies from main/requirements.txt are installed (e.g., pandas, numpy, scikit-learn, imbalanced-learn).
+Python 3.11 is recommended, as indicated by the repository's .pyc files.
+
+Example Code
+from synthetic_data_generator import SyntheticDataGenerator
+
+# Initialize the generator with a real-world dataset
+generator = SyntheticDataGenerator(
+    input_path='sandbox_week3/data/processed/financial_data_cleaned.csv'
+)
+
+# Define parameters for synthetic data generation 
+
+params = {
+    'rare_event_ratio': 0.1,  # 10% of samples represent rare events
+    'resilience_factors': ['regulatory_oversight', 'liquidity_buffer'],
+    'output_path': 'sandbox_week3/data/synthetic/synth_rare_event_data.csv'
+}
+
+# Generate synthetic data
+synthetic_data = generator.generate(params)
+
+# Validate synthetic data
+generator.validate(synthetic_data)
+
+# Save synthetic dataset
+generator.save(synthetic_data, params['output_path'])
+
+Configuration
+
+Parameters (e.g., rare_event_ratio, resilience_factors) can be specified in configuration files in sandbox_week3/config/ or passed directly to the generate method.
+Example configuration:{
+    "rare_event_ratio": 0.1,
+    "resilience_factors": ["regulatory_oversight", "liquidity_buffer"],
+    "features": ["volatility", "interest_rate", "debt_level"],
+    "output_path": "sandbox_week3/data/synthetic/synth_rare_event_data.csv"
+}
+
+
+
+Use Case: Reversal Causal Diagnostics
+The module supports reversal causal diagnostics by generating synthetic datasets that simulate scenarios with varying resilience factors. For example:
+
+Scenario: High regulatory oversight reduces market crash probability.
+Analysis: Train an ElasticNet model on synthetic data and analyze feature importance to confirm the impact of regulatory oversight.
+Output: Visualize results in a dashboard (e.g., cnn_diagnostics_dashboard.png) or feature importance plot.
+
+This enables researchers to identify conditions necessary for resilient financial or economic infrastructures.
+Implementation Details
+
+Techniques: Uses GMM, SMOTE, or GANs for data generation, configurable via parameters.
+Validation: Employs statistical tests to ensure synthetic data aligns with real-world distributions.
+Extensibility: Supports adding new generative methods (e.g., Variational Autoencoders) as experiments evolve.
+Dependencies: Relies on standard libraries (pandas, numpy) and ML frameworks (scikit-learn, potentially tensorflow).
+
+Best Practices
+
+Save Outputs: Store synthetic datasets in sandbox_week3/data/synthetic/ with descriptive names (e.g., synth_rare_event_data_20250425.csv).
+Document Experiments: Log generation parameters and validation results in sandbox_week3/README.md or a notebook (e.g., rare_event_resampling_experiments.ipynb).
+Validate Thoroughly: Ensure synthetic data is representative before using it in modeling or diagnostics.
+Promote to Main: Move validated generation logic to main/src/ for production pipelines.
+
+Future Enhancements
+
+Add support for temporal synthetic data generation to capture time-series dynamics.
+Integrate with main/src/visualization.py for automated plotting of synthetic data distributions.
+Develop a user-friendly interface for configuring resilience factors and rare-event scenarios.
+Incorporate advanced generative models (e.g., GANs, VAEs) for improved realism.
+
+Collaboration
+
+Changelogs: Update sandbox_week3/README.md with details of synthetic data experiments and outcomes.
+Team Workflow: Assign team members to test specific generation techniques or resilience factors.
+Archiving: Move older experiments to an archive (e.g., sandbox_week2/) to keep sandbox_week3/ focused.
+
+Maintainer
+For questions or contributions, contact the repository maintainer via GitHub issues at https://github.com/sboettcher-ub313/Clean-Pendle.

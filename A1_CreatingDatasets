@@ -1,0 +1,58 @@
+
+# 📘 Supplementary Document: Purpose and Overview of `A1_CreatingDatasets`
+
+## 📌 Module Title:
+**A1_CreatingDatasets**
+
+---
+
+## 🎯 Main Goal:
+The primary objective of the `A1_CreatingDatasets` module is to **transform raw financial data into structured, clean, and analysis-ready datasets**. These datasets form the foundation for further exploration, modeling, and insights in the broader scope of financial market research, specifically within the Pendle Finance or similar DeFi (Decentralized Finance) ecosystems.
+
+---
+
+## 🧩 Purpose in Broader Project:
+This module serves as the **first step in a data science pipeline** that includes data ingestion, cleaning, feature engineering, and exportation. The quality and usability of any analysis or model outcomes are heavily dependent on the robustness of this foundational stage.
+
+---
+
+## 🛠️ Key Functionalities:
+
+1. **Data Acquisition**
+   - Aggregates raw data from multiple sources (e.g., CSV files, APIs, historical market data logs).
+   - Handles inconsistencies and structural differences across sources.
+
+2. **Data Cleaning & Preprocessing**
+   - Deals with missing values, formatting issues, and inconsistent timestamp alignments.
+   - Ensures that all datasets have a uniform schema and time index.
+
+3. **Feature Extraction & Engineering**
+   - Derives key financial indicators or metrics from raw data (e.g., interest rates, token yield metrics).
+   - Aligns features with market events or protocols for contextual accuracy.
+
+4. **Dataset Construction**
+   - Combines various inputs into single or multi-part datasets, optimized for machine learning or statistical analysis.
+   - Applies labeling or segmentation based on date, asset type, or risk profiles.
+
+5. **Data Export & Storage**
+   - Outputs datasets in CSV or other standard formats for easy downstream use.
+   - Structures folders to separate raw, processed, and final output data for clarity and reproducibility.
+
+---
+
+## 🗃️ Outputs:
+- Cleaned datasets stored in `/exports`
+- Config files for reproducibility and modular updates
+- Notebooks with code and documentation for interactive understanding
+- Visuals in `/images` folder for exploratory data analysis (EDA)
+
+---
+
+## 📄 Supporting Files:
+- `README_A1_CreatingDatasets_FINAL.md`: Comprehensive guide for using the module.
+- `march 23.html`: A sample data report showcasing outputs and analysis conducted with the processed datasets.
+
+---
+
+## 🔍 Why This Matters:
+In decentralized finance, datasets are often fragmented and noisy. This module addresses that challenge by **providing a systematic and scalable approach to data preparation**, which ensures downstream processes such as model training or financial insights are built on solid data foundations.

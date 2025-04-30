@@ -1,0 +1,57 @@
+# Data Aggregation Phase Mapping (PendleProjects Week 2)
+## Overview
+
+The core objective of the data aggregation phase is to **collect, clean, and align multi-source macroeconomic and behavioral datasets** into a unified framework. This framework enables us to detect early signals of market volatility by integrating various datasets including Yahoo Finance (market data), FRED (macroeconomic data), and Google Trends (behavioral data).
+
+## Goals
+
+### Main Goal
+- **Aggregation:** Consolidate data from multiple sources (Yahoo Finance, FRED, Google Trends) into one unified dataset.
+- **Synchronization:** Align the datasets by a consistent frequency (e.g., weekly or monthly) to ensure accurate time series analysis.
+- **Preparation:** Generate lagged features to simulate real-world scenarios where signals are delayed.
+
+### Learning, Testing, and Validation Key
+This phase acts as a **generator key** across the project pipeline, focusing on:
+
+#### Learning
+- Understanding the relationship between macroeconomic indicators and market behavior.
+- Gaining practical experience in preprocessing and merging datasets from diverse sources.
+- Visualizing datasets to uncover latent trends and patterns.
+
+#### Testing
+- Evaluating assumptions based on exploratory data analysis.
+- Running experiments with various lagged parameters and window sizes.
+- Comparing traditional market indicators (e.g., the VIX) with alternative indicators (e.g., search trends).
+
+#### Validation
+- Verifying that the merged time series data is coherent and complete.
+- Checking for data integrity issues such as leakage and multicollinearity.
+- Ensuring that the aggregated datasets are ready for further modeling and analysis.
+
+## Folder Structure
+
+Within the `PendleProjects/week2` folder, the data aggregation component is organized as follows:
+
+- **`data/`**  
+  Contains raw and preprocessed datasets derived from the multiple sources.
+  
+- **`notebooks/`**  
+  Jupyter notebooks documenting the aggregation process, including code snippets and visual analysis.
+  
+- **`scripts/`**  
+  Helper scripts for automating data fetching, cleaning, and merging procedures.
+  
+- **`images/`**  
+  Visual output files (charts, graphs) generated during the exploratory data analysis phase.
+
+## Outputs
+- **Cleaned Datasets:** CSV files containing aggregated and synchronized data.
+- **Lagged Feature Sets:** Prepared datasets with appropriate lag measures applied.
+- **Documentation:** Detailed notebooks and markdown documentation outlining the process and rationale.
+- **Visualizations:** Graphs and plots that illustrate data trends and potential market signals.
+
+## Final Notes
+- **Baseline Implementation:** The outputs of this phase serve as the baseline experiments. They are expected to evolve as new insights emerge.
+- **Collaboration and Expansion:** Team members are encouraged to fork and adapt these assets for domain-specific applications (such as analysis in crypto, real estate, or other market segments).
+
+This Markdown document provides a high-level mapping of the data aggregation process for Week 2 of the PendleProjects. It serves as a guide for understanding the initial steps in transforming raw data into actionable insights.

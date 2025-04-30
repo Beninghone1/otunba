@@ -1,0 +1,208 @@
+Mapping Document: A2_DataPreprocessing Python Module (preprocess.py)
+
+Overview
+This document maps the functionality of the preprocess.py Python module in the A2_DataPreprocessing directory of the Clean-Pendle repository to its key objectives. The module is designed to preprocess raw data (likely related to Pendle Finance, such as blockchain transactions or market data) for downstream feature engineering and predictive modeling, with a specific focus on addressing the challenge of predicting rare events—events that occur infrequently, such as market crashes, extreme yield spikes, or anomalous transactions. These rare events are critical for analysis but pose machine learning and statistical challenges due to their scarcity in the dataset.
+The document outlines the module’s goals, details its preprocessing pipeline, and maps each step to the corresponding code segments in preprocess.py. It serves as a companion to the module’s code, providing clarity on its implementation and how it mitigates the difficulties of rare event prediction.
+Main Goal
+The primary goal of preprocess.py is to transform raw, potentially noisy data into a clean, standardized, and analysis-ready dataset that supports effective feature engineering and modeling of rare events. The module achieves this by:
+
+Cleaning Data: Removing inconsistencies, handling missing values, and correcting data types to ensure reliability.
+Addressing Rare Events: Applying techniques to enhance the representation of rare events, such as preserving true anomalies, handling imbalanced data, and preparing data for feature engineering that targets rare event signals.
+Standardizing Data: Normalizing numerical features and encoding categorical variables to ensure compatibility with machine learning models.
+Outputting Ready Data: Producing a cleaned dataset (e.g., cleaned_data.csv) for use in the A3_FeatureEngineering module.
+
+Context: Rare Event Prediction
+Rare events in the Clean-Pendle dataset (e.g., extreme market volatility, fraudulent transactions, or rare staking behaviors) occur with low frequency, leading to:
+
+Imbalanced Data: The majority of observations represent "normal" conditions, making it difficult for models to learn patterns of rare events.
+Limited Samples: Few instances of rare events reduce the statistical power for learning.
+Noise Sensitivity: Preprocessing must distinguish between noise and true rare events to avoid suppressing critical signals.
+
+The preprocess.py module addresses these challenges by implementing a robust preprocessing pipeline tailored to rare event prediction, ensuring the dataset is both clean and optimized for downstream analysis.
+Module Structure and Mapping
+Below, we map the key components of preprocess.py to their functionality, providing a high-level description and linking to the corresponding code segments. The module is assumed to follow a typical data preprocessing pipeline using Python libraries like pandas, numpy, and scikit-learn.
+1. Data Loading
+Purpose: Load raw data from a file (e.g., CSV) or external source (e.g., Pendle Finance API or blockchain via web3.py) into a structured format for processing.
+Functionality:
+
+Reads data into a pandas DataFrame.
+Validates input data for expected columns (e.g., timestamp, market_id, yield_rate, transaction_volume, event_type).
+Logs basic statistics (e.g., row count, missing values) for debugging.
+
+Code Mapping:
+import pandas as pd
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+def load_data(file_path):
+    """Load raw data from CSV file."""
+    logging.info(f"Loading data from {file_path}")
+    df = pd.read_csv(file_path)
+    logging.info(f"Loaded {len(df)} rows with columns: {df.columns.tolist()}")
+    return df
+
+# Example usage
+raw_data_path = 'data/raw_data.csv'
+df = load_data(raw_data_path)
+
+Rare Event Consideration: Ensures that rare event indicators (e.g., event_type == "market_crash") are loaded correctly and not inadvertently dropped during import.
+2. Data Cleaning
+Purpose: Remove inconsistencies, duplicates, and errors to create a reliable dataset.
+Functionality:
+
+Removes duplicate rows based on key columns (e.g., timestamp and market_id).
+Corrects data type issues (e.g., converts timestamp to datetime).
+Identifies and removes invalid entries (e.g., negative transaction_volume).
+
+Code Mapping:
+def clean_data(df):
+    """Clean raw data by removing duplicates and correcting data types."""
+    # Remove duplicates
+    initial_rows = len(df)
+    df = df.drop_duplicates(subset=['timestamp', 'market_id'], keep='first')
+    logging.info(f"Removed {initial_rows - len(df)} duplicate rows")
+
+    # Convert data types
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df['transaction_volume'] = df['transaction_volume'].astype(float)
+
+    # Remove invalid entries- Remove invalid entries
+    df = df[df['transaction_volume'] >= 0]
+    logging.info(f"Cleaned data: {len(df)} rows remaining")
+    return df
+
+# Apply cleaning
+df = clean_data(df)
+
+Rare Event Consideration: Ensures that true anomalies (e.g., extreme yield_rate values) are preserved as potential rare events, rather than being removed as outliers.
+3. Handling Missing Values
+Purpose: Impute or handle missing values to maintain data integrity, especially for columns relevant to rare events.
+Functionality:
+
+Uses domain-specific imputation (e.g., forward-fill for time-series data like yield_rate).
+Flags rows with missing critical fields (e.g., event_type) for review.
+Avoids imputation methods that dilute rare event signals (e.g., mean imputation for sparse event_type).
+
+Code Mapping:
+def handle_missing_values(df):
+    """Handle missing values with domain-specific imputation."""
+    # Forward-fill time-series data
+    df['yield_rate'] = df['yield_rate'].fillna(method='ffill')
+    
+    # Flag missing event_type
+    df['missing_event_type'] = df['event_type'].isnull()
+    df['event_type'] = df['event_type'].fillna('unknown')
+    
+    logging.info(f"Handled missing values. Missing event_type: {df['missing_event_type'].sum()}")
+    return df
+
+# Apply missing value handling
+df = handle_missing_values(df)
+
+Rare Event Consideration: Uses forward-fill for yield_rate to preserve temporal trends that may precede rare events, and flags missing event_type to avoid masking potential rare events.
+4. Data Transformation
+Purpose: Normalize numerical features and encode categorical variables to prepare data for modeling.
+Functionality:
+
+Scales numerical columns (e.g., yield_rate, transaction_volume) using standardization.
+One-hot encodes categorical variables (e.g., market_id).
+Preserves rare event indicators without transformation.
+
+Code Mapping:
+from sklearn.preprocessing import StandardScaler
+
+def transform_data(df):
+    """Normalize numerical features and encode categorical variables."""
+    # Scale numerical columns
+    scaler = StandardScaler()
+    numerical_cols = ['yield_rate', 'transaction_volume']
+    df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
+    
+    # Encode categorical variables
+    df = pd.get_dummies(df, columns=['market_id'], prefix='market')
+    
+    logging.info("Transformed numerical and categorical features")
+    return df
+
+# Apply transformations
+df = transform_data(df)
+
+Rare Event Consideration: Avoids transformations that reduce the distinctiveness of rare events (e.g., ensures event_type remains unscaled).
+5. Rare Event Enhancement
+Purpose: Enhance the representation of rare events to improve downstream modeling.
+Functionality:
+
+Flags rare events (e.g., event_type == "market_crash") for special handling.
+Optionally applies oversampling techniques (e.g., SMOTE) for rare event classes.
+Creates preliminary features (e.g., volatility flags) to highlight rare event patterns.
+
+Code Mapping:
+from imblearn.over_sampling import SMOTE
+
+def enhance_rare_events(df):
+    """Enhance representation of rare events."""
+    # Flag rare events
+    df['is_rare_event'] = df['event_type'] == 'market_crash'
+    logging.info(f"Identified {df['is_rare_event'].sum()} rare events")
+    
+    # Optional: Apply SMOTE for rare event oversampling
+    if df['is_rare_event'].sum() > 0:
+        smote = SMOTE(random_state=42)
+        X = df.drop(columns=['event_type', 'is_rare_event'])
+        y = df['is_rare_event']
+        X_resampled, y_resampled = smote.fit_resample(X, y)
+        df_resampled = pd.DataFrame(X_resampled, columns=X.columns)
+        df_resampled['is_rare_event'] = y_resampled
+        df_resampled['event_type'] = df_resampled['is_rare_event'].map({True: 'market_crash', False: 'normal'})
+        logging.info(f"Oversampled to {len(df_resampled)} rows")
+        return df_resampled
+    return df
+
+# Apply rare event enhancement
+df = enhance_rare_events(df)
+
+Rare Event Consideration: Uses SMOTE cautiously to avoid introducing synthetic noise, and flags rare events for feature engineering (e.g., volatility metrics).
+6. Output Generation
+Purpose: Save the preprocessed dataset for use in A3_FeatureEngineering.
+Functionality:
+
+Saves the cleaned and transformed dataset to a CSV file.
+Logs summary statistics of the final dataset.
+
+Code Mapping:
+def save_data(df, output_path):
+    """Save preprocessed data to CSV."""
+    df.to_csv(output_path, index=False)
+    logging.info(f"Saved preprocessed data to {output_path}")
+    logging.info(f"Final dataset stats:\n{df.describe()}")
+
+# Save output
+output_path = 'data/cleaned_data.csv'
+save_data(df, output_path)
+
+Rare Event Consideration: Ensures rare event flags and enhanced data are included in the output for downstream use.
+Dependencies
+The preprocess.py module relies on:
+
+pandas for data manipulation.
+numpy for numerical operations.
+scikit-learn for scaling and encoding.
+imblearn for handling imbalanced data (e.g., SMOTE).
+logging for tracking preprocessing steps.
+
+Integration with A3_FeatureEngineering
+The output of preprocess.py (e.g., cleaned_data.csv) is designed for use in A3_FeatureEngineering, where features like moving averages, volatility indices, or rare event proximity flags are created. The preprocessing ensures that rare events are well-represented and that the data is formatted for efficient feature extraction.
+Example Workflow
+Assuming a dataset with columns timestamp, market_id, yield_rate, transaction_volume, and event_type:
+
+Load raw_data.csv into a DataFrame.
+Clean by removing duplicates and correcting types.
+Impute missing yield_rate with forward-fill and flag missing event_type.
+Scale yield_rate and transaction_volume, and encode market_id.
+Flag and oversample rare events (e.g., event_type == "market_crash").
+Save the result to cleaned_data.csv.
+
+Conclusion
+The preprocess.py module in A2_DataPreprocessing is a robust tool for preparing raw data for rare event prediction in the Clean-Pendle project. By cleaning, transforming, and enhancing the dataset, it addresses the challenges of imbalanced data and limited rare event samples, ensuring the data is ready for feature engineering and modeling. This mapping document provides a clear link between the module’s code and its objectives, facilitating understanding and maintenance.

@@ -1,9 +1,0 @@
-
-🏆 GRAND CHAMPION 🏆
-👑 Name: Elastic_L0_C10 + SMOTE_G1
-🔁 Generation: 1
-🧬 Genome: C = 1.19, l1_ratio = 0.00
-📈 PR AUC: 0.673
-🎖 ROC AUC: 0.916
-🧬 Lineage: child of Elastic_L0_C10 + SMOTE_G0
-🏁 Unstoppable!

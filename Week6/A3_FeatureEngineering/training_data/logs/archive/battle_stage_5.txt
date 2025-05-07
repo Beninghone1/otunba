@@ -1,9 +1,0 @@
-
-🏆 GRAND CHAMPION 🏆
-👑 Name: Elastic_L100_C10 + No Resampling_G1
-🔁 Generation: 1
-🧬 Genome: C = 0.86, l1_ratio = 0.93
-📈 PR AUC: 0.073
-🎖 ROC AUC: 0.549
-🧬 Lineage: child of Elastic_L100_C10 + No Resampling_G0
-🏁 Unstoppable!
